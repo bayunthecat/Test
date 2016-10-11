@@ -8,6 +8,8 @@ import com.lwd.platform.testing.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TestServiceImpl extends AbstractCrudService<Test> implements TestService {
 
@@ -25,5 +27,10 @@ public class TestServiceImpl extends AbstractCrudService<Test> implements TestSe
     @Override
     protected CrudDao<Test> getCrudDao() {
         return testDao;
+    }
+
+    @Override
+    public List<Test> getAll(int count, int offset) {
+        return testDao.getTests(count, offset);
     }
 }

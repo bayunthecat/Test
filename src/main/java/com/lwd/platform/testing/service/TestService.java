@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface TestService extends CrudService<Test> {
 
-    List<Test> getTests();
+    List<Test> getAll(int count, int offset);
+
 }

@@ -4,10 +4,7 @@ import com.lwd.platform.testing.model.Answer;
 import com.lwd.platform.testing.service.AnswerService;
 import com.lwd.platform.testing.util.constant.Mime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/answer")
 @RestController
@@ -17,7 +14,7 @@ public class AnswerController {
     private AnswerService answerService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = Mime.JSON)
-    public Answer createAnswer(Answer answer) {
+    public Answer createAnswer(@RequestBody Answer answer) {
         return answerService.create(answer);
     }
 

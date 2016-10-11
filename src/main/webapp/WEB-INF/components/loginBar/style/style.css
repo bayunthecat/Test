@@ -1,0 +1,17 @@
+div.login-bar {
+    height: 50px;
+    background-color: #e5d560;
+}
+
+div.login-form-wrapper {
+    float: right;
+}
+
+form.login-form input {
+    display: inline-block;
+    margin: 10px 2.5px 0 2.5px;
+}
+
+form.login-form input:last-child {
+    margin-right: 5px;
+}

@@ -8,7 +8,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <properties>
-        <spring.version>4.2.5.RELEASE</spring.version>
+        <spring.version>4.3.1.RELEASE</spring.version>
+        <spring.security.version>4.1.3.RELEASE</spring.security.version>
         <servlet.api.version>3.1.0</servlet.api.version>
         <jackson.version>2.8.0</jackson.version>
         <mysql.version>5.1.6</mysql.version>
@@ -16,6 +17,9 @@
         <log4j.version>1.2.17</log4j.version>
         <aspectj.version>1.8.5</aspectj.version>
         <junit.version>4.11</junit.version>
+        <wro4j.version>1.8.0</wro4j.version>
+        <apache-commons-verion>3.4</apache-commons-verion>
+        <apache-io-commons-version>1.3.2</apache-io-commons-version>
     </properties>
     <dependencies>
         <dependency>
@@ -78,6 +82,31 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache-commons-verion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${apache-io-commons-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -99,6 +128,28 @@
                     <username>admin</username>
                     <password>admin</password>
                     <path>/testing</path>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>ro.isdc.wro4j</groupId>
+                <artifactId>wro4j-maven-plugin</artifactId>
+                <version>${wro4j.version}</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <targetGroups>all</targetGroups>
+                    <minimize>false</minimize>
+                    <contextFolder>src/main/webapp/</contextFolder>
+                    <jsDestinationFolder>src/main/webapp/WEB-INF/wro/js/</jsDestinationFolder>
+                    <cssDestinationFolder>src/main/webapp/WEB-INF/wro/css/</cssDestinationFolder>
+                    <wroFile>src/main/webapp/WEB-INF/wro.xml</wroFile>
+                    <ignoreMissingResources>false</ignoreMissingResources>
                 </configuration>
             </plugin>
         </plugins>

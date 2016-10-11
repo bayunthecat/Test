@@ -20,11 +20,11 @@ public class RepositoryLogger {
 
     @After("createInvoked(objectToPersist)")
     public void logCreation(Object objectToPersist) {
-        LOG.error("Object persisted -> " + objectToPersist);
+        LOG.info("Object persisted -> " + objectToPersist);
     }
 
     @After("readInvoked(objectToPersist, id)")
     public void logReading(Object objectToPersist, int id) {
-        LOG.error("Object with id " + id + " read -> " + objectToPersist);
+        LOG.info("Object with id " + id + " read -> " + objectToPersist);
     }
 }

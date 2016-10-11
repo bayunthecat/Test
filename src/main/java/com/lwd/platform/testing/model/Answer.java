@@ -11,8 +11,8 @@ public class Answer extends ModelEntity {
     private String content;
 
     @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "questionId")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "questionId", referencedColumnName = "id")
     private Question question;
 
     public String getContent() {

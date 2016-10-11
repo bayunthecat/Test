@@ -4,16 +4,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "No id specified")
-public class UpdateException extends RuntimeException {
+public class ModifyException extends RuntimeException {
 
-    public UpdateException() {
+    public ModifyException() {
     }
 
-    public UpdateException(String message) {
+    public ModifyException(String message) {
         super(message);
     }
 
-    public UpdateException(String message, Throwable cause) {
+    public ModifyException(String message, Throwable cause) {
         super(message, cause);
     }
 }

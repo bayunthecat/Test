@@ -17,7 +17,7 @@ public class ModelEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     public int getId() {
         return id;

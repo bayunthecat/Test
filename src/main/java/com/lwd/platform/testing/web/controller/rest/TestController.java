@@ -4,10 +4,11 @@ import com.lwd.platform.testing.model.ModelEntity;
 import com.lwd.platform.testing.model.Test;
 import com.lwd.platform.testing.service.TestService;
 import com.lwd.platform.testing.util.constant.Mime;
-import com.lwd.platform.testing.util.constant.RequestMappings;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/test")
 @RestController
@@ -36,5 +37,10 @@ public class TestController {
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public ModelEntity getTest(@PathVariable int id) {
         return testService.read(id);
+    }
+
+    @RequestMapping(value = "/getAll/count/{count}/offset/{offset}", method = RequestMethod.GET)
+    public List<Test> getTests(@PathVariable int count, @PathVariable int offset) {
+        return testService.getAll(count, offset);
     }
 }

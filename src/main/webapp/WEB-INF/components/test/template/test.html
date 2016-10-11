@@ -1,0 +1,14 @@
+<div class="test">
+    <h3>{{$ctrl.test.email}}</h3>
+    <div class="question-container">
+        <div ng-repeat="question in $ctrl.test.questions">
+            <p>{{$index + 1}}.{{question.content}}</p>
+            <div class="answer-container">
+                <div ng-repeat="answer in question.answers">
+                    <p>{{$index + 1}}.{{answer.content}}</p>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@ package com.lwd.platform.testing.repo.mysql;
 
 import com.lwd.platform.testing.model.Test;
 import com.lwd.platform.testing.repo.TestDao;
-import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +12,11 @@ import java.util.List;
 public class MySqlTestDao extends AbstractCrudDao<Test> implements TestDao {
 
     @Autowired
-    public MySqlTestDao(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
+    private Session session;
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Test> getTests(int count, int offset) {
+        return session.createCriteria(Test.class).setMaxResults(count).setFirstResult(offset).list();
+    }
 }
