@@ -2,7 +2,6 @@ package com.lwd.platform.testing.web.controller.rest;
 
 import com.lwd.platform.testing.model.User;
 import com.lwd.platform.testing.service.UserService;
-import com.lwd.platform.testing.web.controller.bean.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public User createUser(@RequestBody UserBean bean) {
+    public User createUser(@RequestBody User bean) {
         return userService.create(bean);
     }
 
