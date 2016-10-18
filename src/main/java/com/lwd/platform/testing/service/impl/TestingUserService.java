@@ -16,8 +16,11 @@ public class TestingUserService implements UserDetailsService {
     private UserDao userDao;
 
     @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        User user = userDao.read(new User(), Integer.parseInt(id));
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPasswordHash(), user.getRoles());
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userDao.getUserByEmail(email);
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPasswordHash(),
+                user.getRoles());
     }
 }

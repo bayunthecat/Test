@@ -20,6 +20,23 @@ public class Const {
         }
     }
 
+    public class Tables {
+
+        public class User {
+
+            public static final String USER_EMAIL = "email";
+
+            public static final String USER_PASSWORD_HASH = "passwordHash";
+
+            private User() {
+            }
+        }
+
+        private Tables() {
+        }
+
+    }
+
     private Const() {
     }
 }
