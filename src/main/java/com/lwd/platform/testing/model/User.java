@@ -1,11 +1,9 @@
 package com.lwd.platform.testing.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.lwd.platform.testing.util.constant.Const;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -14,11 +12,16 @@ public class User extends ModelEntity {
     @Column
     private String email;
 
+    @JsonProperty("password")
     @Column
     private String passwordHash;
 
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = Const.Tables.UserRole.USER_ROLE, joinColumns = {
+            @JoinColumn(name = Const.Tables.UserRole.USER_ID)
+    }, inverseJoinColumns = {
+            @JoinColumn(name = Const.Tables.UserRole.ROLE_ID)
+    })
     private List<Role> roles;
 
     public String getEmail() {

@@ -26,9 +26,19 @@ public class Const {
 
             public static final String USER_EMAIL = "email";
 
-            public static final String USER_PASSWORD_HASH = "passwordHash";
-
             private User() {
+            }
+        }
+
+        public class UserRole {
+
+            public static final String USER_ROLE = "UserRole";
+
+            public static final String ROLE_ID = "roleId";
+
+            public static final String USER_ID = "userId";
+
+            private UserRole() {
             }
         }
 

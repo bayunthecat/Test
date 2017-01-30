@@ -1,18 +1,13 @@
 package com.lwd.platform.testing.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity(name = "role")
 public class Role extends ModelEntity implements GrantedAuthority {
-
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    private User user;
 
     @Column
     private String name;
@@ -29,13 +24,5 @@ public class Role extends ModelEntity implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return name;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

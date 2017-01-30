@@ -24,27 +24,30 @@ abstract class AbstractCrudDao<T> implements CrudDao<T> {
     @Override
     public T delete(T object) {
         checkModifyAllowed(object);
-        session.load(object, idInjector.getId(object));
         session.delete(object);
         session.flush();
         return object;
     }
 
+    @Override
     public T update(T object) {
         checkModifyAllowed(object);
         session.update(object);
-        session.get(object.getClass(), idInjector.getId(object));
         session.flush();
         return object;
     }
 
+    @Override
     public T read(T object, int id) {
         session.load(object, id);
         return object;
     }
 
     private void checkModifyAllowed(T object) {
-        if(idInjector.getId(object) == null) {
+        if (object == null) {
+            throw new ModifyException("Specified object is empty.");
+        }
+        if (idInjector.getId(object) == null) {
             throw new ModifyException(String.format("%s has no id specified", object));
         }
     }

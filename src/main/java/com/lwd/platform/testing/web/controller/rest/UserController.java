@@ -18,8 +18,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public User createUser(@RequestBody User bean) {
-        return userService.create(bean);
+    public User createUser(@RequestBody User user) {
+        return userService.createWithHash(user);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

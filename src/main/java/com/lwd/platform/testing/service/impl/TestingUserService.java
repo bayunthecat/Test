@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service(Const.Bean.USER_DETAILS_SERVICE)
@@ -14,6 +15,10 @@ public class TestingUserService implements UserDetailsService {
 
     @Autowired
     private UserDao userDao;
+
+    //For test delete
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

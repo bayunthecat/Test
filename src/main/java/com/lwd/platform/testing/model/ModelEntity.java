@@ -1,7 +1,5 @@
 package com.lwd.platform.testing.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +16,6 @@ public class ModelEntity {
     }
 
     @Id
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
