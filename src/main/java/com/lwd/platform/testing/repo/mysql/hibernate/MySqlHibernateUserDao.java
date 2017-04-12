@@ -1,4 +1,4 @@
-package com.lwd.platform.testing.repo.mysql;
+package com.lwd.platform.testing.repo.mysql.hibernate;
 
 import com.lwd.platform.testing.model.User;
 import com.lwd.platform.testing.repo.UserDao;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MySqlUserDao extends AbstractCrudDao<User> implements UserDao {
+public class MySqlHibernateUserDao extends AbstractHibernateCrudDao<User> implements UserDao {
 
     @Autowired
     private Session session;

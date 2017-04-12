@@ -9,14 +9,13 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    //TODO make config
     private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/testing";
 
     private static final String USERNAME = "root";
 
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "root";
 
     @Bean
     public DataSource getDataSource() {

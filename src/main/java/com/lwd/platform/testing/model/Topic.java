@@ -1,8 +1,6 @@
 package com.lwd.platform.testing.model;
 
-import org.springframework.security.core.GrantedAuthority;
-
-public class Role extends ModelEntity implements GrantedAuthority {
+public class Topic extends ModelEntity {
 
     private String name;
 
@@ -12,9 +10,5 @@ public class Role extends ModelEntity implements GrantedAuthority {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAuthority() {
-        return name;
     }
 }

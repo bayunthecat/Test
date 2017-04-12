@@ -1,4 +1,4 @@
-package com.lwd.platform.testing.repo.mysql;
+package com.lwd.platform.testing.repo.mysql.hibernate;
 
 import com.lwd.platform.testing.model.Question;
 import com.lwd.platform.testing.repo.QuestionDao;
@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MySqlQuestionDao extends AbstractCrudDao<Question> implements QuestionDao {
+public class MySqlHibernateQuestionDao extends AbstractHibernateCrudDao<Question> implements QuestionDao {
 
     @Override
     public List<Question> createQuestions(List<Question> questions) {
-        questions.stream().forEach(this::create);
+        questions.forEach(this::create);
         return questions;
     }
 }

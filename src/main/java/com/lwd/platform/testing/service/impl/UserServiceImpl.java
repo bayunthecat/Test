@@ -26,11 +26,6 @@ public class UserServiceImpl extends AbstractCrudService<User> implements UserSe
     private StringHashProcessor hashExtractor;
 
     @Override
-    public User read(int id) {
-        return userDao.read(new User(), id);
-    }
-
-    @Override
     public User createWithHash(User user) {
         user.setPasswordHash(encoder.encode(user.getPasswordHash()));
         return userDao.create(user);

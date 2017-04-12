@@ -23,9 +23,4 @@ public class QuestionServiceImpl extends AbstractCrudService<Question> implement
     protected CrudDao<Question> getCrudDao() {
         return questionDao;
     }
-
-    @Override
-    public Question read(int id) {
-        return questionDao.read(new Question(), id);
-    }
 }

@@ -1,18 +1,9 @@
 package com.lwd.platform.testing.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import javax.persistence.*;
-
-@Entity
 public class Answer extends ModelEntity {
 
-    @Column(name = "content")
     private String content;
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "questionId", referencedColumnName = "id")
     private Question question;
 
     public String getContent() {

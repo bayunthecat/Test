@@ -1,4 +1,4 @@
-package com.lwd.platform.testing.repo.mysql;
+package com.lwd.platform.testing.repo.mysql.hibernate;
 
 import com.lwd.platform.testing.exception.repo.ModifyException;
 import com.lwd.platform.testing.repo.CrudDao;
@@ -6,7 +6,7 @@ import com.lwd.platform.testing.repo.tools.IdInjectionStrategy;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
-abstract class AbstractCrudDao<T> implements CrudDao<T> {
+abstract class AbstractHibernateCrudDao<T> implements CrudDao<T> {
 
     @Autowired
     private IdInjectionStrategy idInjector;

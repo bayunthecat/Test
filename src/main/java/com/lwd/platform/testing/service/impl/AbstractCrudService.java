@@ -11,7 +11,9 @@ public abstract class AbstractCrudService<T> implements CrudService<T>{
     }
 
     @Override
-    public abstract T read(int id);
+    public T read(int id) {
+        return getCrudDao().read(id);
+    }
 
     @Override
     public T update(T t) {

@@ -1,24 +1,13 @@
 package com.lwd.platform.testing.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
 public class Question extends ModelEntity {
 
-    @Column(name = "content")
     private String content;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers;
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "testId")
     private Test test;
 
     public String getContent() {
