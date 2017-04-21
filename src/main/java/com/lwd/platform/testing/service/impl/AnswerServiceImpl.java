@@ -15,7 +15,7 @@ public class AnswerServiceImpl extends AbstractCrudService<Answer> implements An
 
     @Override
     public Answer read(int id) {
-        return answerDao.read(new Answer(), id);
+        return answerDao.read(id);
     }
 
     @Override

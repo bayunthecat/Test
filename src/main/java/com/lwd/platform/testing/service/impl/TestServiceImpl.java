@@ -21,7 +21,7 @@ public class TestServiceImpl extends AbstractCrudService<Test> implements TestSe
 
     @Override
     public Test read(int id) {
-        return testDao.read(new Test(), id);
+        return testDao.read(id);
     }
 
     @Override

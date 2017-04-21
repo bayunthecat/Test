@@ -46,15 +46,8 @@ public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
 
     @Override
     public User update(User user) {
-        int affectedRows = jdbcTemplate.update(con -> {
-            PreparedStatement statement = con.prepareStatement(UPDATE_USER);
-            int parameter = 1;
-            statement.setObject(parameter++, user.getEmail());
-            statement.setObject(parameter++, user.getPasswordHash());
-            statement.setObject(parameter, user.getId());
-            return statement;
-        });
-        return affectedRows != 0 ? user : null;
+        //TODO make generic parameter extraction
+        return jdbcTemplate.update(UPDATE_USER, 0, 1) != 0 ? user : null;
     }
 
     @Override
