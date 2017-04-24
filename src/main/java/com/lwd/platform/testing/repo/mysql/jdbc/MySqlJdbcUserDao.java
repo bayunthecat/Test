@@ -8,16 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
+import javax.xml.ws.ServiceMode;
 import java.sql.PreparedStatement;
 
+@Repository
 public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
 
     private static final String INSERT_USER = "INSERT INTO user (email, role) VALUES (?,?)";
 
     private static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE id = ?";
-    public static final String UPDATE_USER = "UPDATE user SET email = ?, password = ? WHERE id = ?";
+
+    private static final String UPDATE_USER = "UPDATE user SET email = ?, password = ? WHERE id = ?";
 
     private JdbcTemplate jdbcTemplate;
 
