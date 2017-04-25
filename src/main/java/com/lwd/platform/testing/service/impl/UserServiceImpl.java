@@ -6,7 +6,6 @@ import com.lwd.platform.testing.repo.UserDao;
 import com.lwd.platform.testing.service.StringHashProcessor;
 import com.lwd.platform.testing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +17,6 @@ public class UserServiceImpl extends AbstractCrudService<User> implements UserSe
 
     @Autowired
     private UserDao userDao;
-
-    @Autowired
-    private ConversionService conversionService;
 
     @Autowired
     private StringHashProcessor hashExtractor;

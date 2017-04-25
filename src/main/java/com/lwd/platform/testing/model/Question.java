@@ -10,6 +10,8 @@ public class Question extends ModelEntity {
 
     private Test test;
 
+    private Topic topic;
+
     public String getContent() {
         return content;
     }
@@ -32,5 +34,13 @@ public class Question extends ModelEntity {
 
     public void setTest(Test test) {
         this.test = test;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 }

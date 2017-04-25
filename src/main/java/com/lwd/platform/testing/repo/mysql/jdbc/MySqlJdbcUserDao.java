@@ -9,11 +9,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import javax.xml.ws.ServiceMode;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 @Repository
 public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
@@ -23,6 +22,7 @@ public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
     private static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE id = ?";
 
     private static final String UPDATE_USER = "UPDATE user SET email = ?, password = ? WHERE id = ?";
+    public static final String DELETE_USER = "DELETE user WHERE id = ?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -35,7 +35,7 @@ public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
     public User create(User user) {
         KeyHolder holder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
-            PreparedStatement statement = con.prepareStatement(INSERT_USER);
+            PreparedStatement statement = con.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
             int parameter = 1;
             statement.setObject(parameter++, user.getEmail());
             statement.setObject(parameter, user.getPasswordHash());
@@ -62,6 +62,6 @@ public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
 
     @Override
     public User delete(User user) {
-        return null;
+        return jdbcTemplate.update(DELETE_USER, user.getId()) != 0 ? user : null;
     }
 }

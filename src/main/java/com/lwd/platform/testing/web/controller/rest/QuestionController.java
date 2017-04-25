@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class QuestionController {
 
-    @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    public QuestionController(QuestionService questionService) {
+        this.questionService = questionService;
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Question createQuestion(@RequestBody Question question) {

@@ -1,55 +1,68 @@
 package com.lwd.platform.testing.repo.mysql.jdbc;
 
-import java.sql.PreparedStatement;
-import javax.sql.DataSource;
-
-import com.lwd.platform.testing.model.User;
+import com.lwd.platform.testing.model.Test;
 import com.lwd.platform.testing.repo.CrudDao;
-import com.lwd.platform.testing.repo.UserDao;
+import com.lwd.platform.testing.repo.TestDao;
+import com.lwd.platform.testing.repo.mysql.jdbc.mapper.TestRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class MySqlJdbcTestDao implements CrudDao<User>, UserDao{
+import javax.sql.DataSource;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.List;
 
-    private static final String INSERT_USER = "";
+@Repository
+public class MySqlJdbcTestDao implements CrudDao<Test>, TestDao {
+
+    private static final String INSERT_TEST = "INSERT INTO test (name) VALUES (?)";
+
+    private static final String SELECT_TEST_BY_ID = "SELECT * FROM user WHERE id = ?";
+
+    private static final String UPDATE_TEST = "UPDATE test SET name = ? WHERE id = ?";
 
     private JdbcTemplate template;
 
+    @Autowired
     public MySqlJdbcTestDao(DataSource dataSource) {
         template = new JdbcTemplate(dataSource);
     }
 
     @Override
-    public User create(User user) {
+    public Test create(Test test) {
         KeyHolder holder = new GeneratedKeyHolder();
-        template.update(con -> {
-            PreparedStatement stmt = con.prepareStatement(INSERT_USER);
+        int affectedRows = template.update(con -> {
+            PreparedStatement stmt = con.prepareStatement(INSERT_TEST, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, test.getName());
             return stmt;
         }, holder);
-        user.setId(holder.getKey().intValue());
-        return user;
-    }
-
-    @Override
-    public User read(int id) {
+        if (affectedRows != 0) {
+            test.setId(holder.getKey().intValue());
+            return test;
+        }
         return null;
     }
 
     @Override
-    public User update(User user) {
-        return null;
+    public Test read(int id) {
+        return template.queryForObject(SELECT_TEST_BY_ID, new TestRowMapper(), id);
     }
 
     @Override
-    public User delete(User user) {
-        return null;
+    public Test update(Test test) {
+        return template.update(UPDATE_TEST, test.getName(), test.getId()) != 0 ? test : null;
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public Test delete(Test test) {
+        return template.update("DELETE * FROM test WHERE id = ?", test.getId()) != 0 ? test : null;
+    }
+
+    @Override
+    public List<Test> getTests(int count, int offset) {
         return null;
     }
 }

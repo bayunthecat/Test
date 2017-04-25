@@ -16,8 +16,12 @@ public class TestController {
 
     private static final Logger LOG = Logger.getLogger(TestController.class);
 
-    @Autowired
     private TestService testService;
+
+    @Autowired
+    public TestController(TestService testService) {
+        this.testService = testService;
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = Mime.JSON)
     public ModelEntity createTest(@RequestBody Test test) {

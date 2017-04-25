@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class AnswerController {
 
-    @Autowired
     private AnswerService answerService;
+
+    @Autowired
+    public AnswerController(AnswerService answerService) {
+        this.answerService = answerService;
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = Mime.JSON)
     public Answer createAnswer(@RequestBody Answer answer) {
