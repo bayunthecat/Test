@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnswerServiceImpl extends AbstractCrudService<Answer> implements AnswerService {
 
-    @Autowired
     private AnswerDao answerDao;
+
+    @Autowired
+    public AnswerServiceImpl(AnswerDao answerDao) {
+        this.answerDao = answerDao;
+    }
 
     @Override
     public Answer read(int id) {

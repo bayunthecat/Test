@@ -22,7 +22,7 @@ public class AnswerController {
         return answerService.create(answer);
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Answer getAnswer(@PathVariable int id) {
         return answerService.read(id);
     }

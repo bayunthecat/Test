@@ -17,12 +17,13 @@ import java.sql.Statement;
 @Repository
 public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
 
-    private static final String INSERT_USER = "INSERT INTO user (email, role) VALUES (?,?)";
+    private static final String INSERT_USER = "INSERT INTO user (email) VALUES (?)";
 
     private static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE id = ?";
 
     private static final String UPDATE_USER = "UPDATE user SET email = ?, password = ? WHERE id = ?";
-    public static final String DELETE_USER = "DELETE user WHERE id = ?";
+
+    private static final String DELETE_USER = "DELETE FROM user WHERE id = ?";
 
     private JdbcTemplate jdbcTemplate;
 

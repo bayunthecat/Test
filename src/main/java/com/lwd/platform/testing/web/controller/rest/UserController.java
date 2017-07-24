@@ -16,7 +16,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUserById(@PathVariable int id) {
         return userService.read(id);
     }

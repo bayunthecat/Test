@@ -20,7 +20,7 @@ public class MySqlJdbcTestDao implements CrudDao<Test>, TestDao {
 
     private static final String INSERT_TEST = "INSERT INTO test (name) VALUES (?)";
 
-    private static final String SELECT_TEST_BY_ID = "SELECT * FROM user WHERE id = ?";
+    private static final String SELECT_TEST_BY_ID = "SELECT * FROM test WHERE id = ?";
 
     private static final String UPDATE_TEST = "UPDATE test SET name = ? WHERE id = ?";
 

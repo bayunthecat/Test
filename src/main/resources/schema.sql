@@ -18,7 +18,7 @@ USE `testing` ;
 -- Table `testing`.`test`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `testing`.`test` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -28,7 +28,7 @@ ENGINE = InnoDB;
 -- Table `testing`.`topic`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `testing`.`topic` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -38,7 +38,7 @@ ENGINE = InnoDB;
 -- Table `testing`.`question`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `testing`.`question` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(45) NULL,
   `topicId` INT NULL,
   PRIMARY KEY (`id`),
@@ -55,7 +55,7 @@ ENGINE = InnoDB;
 -- Table `testing`.`answer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `testing`.`answer` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(45) NULL,
   `questionId` INT NULL,
   PRIMARY KEY (`id`),
@@ -72,7 +72,7 @@ ENGINE = InnoDB;
 -- Table `testing`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `testing`.`user` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -83,7 +83,7 @@ ENGINE = InnoDB;
 -- Table `testing`.`role`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `testing`.`role` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;

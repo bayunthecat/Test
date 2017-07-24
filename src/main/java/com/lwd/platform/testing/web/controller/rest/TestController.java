@@ -38,7 +38,7 @@ public class TestController {
         return testService.update(test);
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelEntity getTest(@PathVariable int id) {
         return testService.read(id);
     }

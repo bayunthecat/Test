@@ -22,7 +22,7 @@ public class MySqlJdbcAnswerDao implements CrudDao<Answer>, AnswerDao {
 
     @Autowired
     public MySqlJdbcAnswerDao(DataSource dataSource) {
-        template = new JdbcTemplate();
+        template = new JdbcTemplate(dataSource);
     }
 
     @Override

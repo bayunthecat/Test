@@ -21,7 +21,7 @@ public class QuestionController {
         return questionService.create(question);
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Question getQuestion(@PathVariable int id) {
         return questionService.read(id);
     }

@@ -1,6 +1,9 @@
 package com.lwd.platform.testing.init;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -8,14 +11,18 @@ import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
-import javax.sql.DataSource;
-
 @Configuration
 public class MySqlDataSourceInitializer {
 
-    @Bean
+    private final DataSource dataSource;
+
     @Autowired
-    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
+    public MySqlDataSourceInitializer(@Qualifier("rawDataSource") DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Bean
+    public DataSourceInitializer dataSourceInitializer() {
         DataSourceInitializer dsi = new DataSourceInitializer();
         dsi.setDataSource(dataSource);
         dsi.setDatabasePopulator(getDatabasePopulator());
@@ -24,7 +31,10 @@ public class MySqlDataSourceInitializer {
 
     private DatabasePopulator getDatabasePopulator() {
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+        //TODO make separate resource folder and reads scripts
         populator.addScript(new ClassPathResource("schema.sql"));
+        populator.addScript(new ClassPathResource("insert-roles.sql"));
+//        populator.addScript(new ClassPathResource("insert-users.sql"));
         return populator;
     }
 }
