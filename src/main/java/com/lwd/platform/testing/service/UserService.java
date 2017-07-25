@@ -10,4 +10,6 @@ public interface UserService extends CrudService<User> {
      * @return newly created user with hashed password
      */
     User createWithHash(User user);
+
+    User getUserByEmail(String email);
 }

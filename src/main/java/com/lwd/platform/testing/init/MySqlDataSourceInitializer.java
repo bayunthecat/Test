@@ -33,8 +33,7 @@ public class MySqlDataSourceInitializer {
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         //TODO make separate resource folder and reads scripts
         populator.addScript(new ClassPathResource("schema.sql"));
-        populator.addScript(new ClassPathResource("insert-roles.sql"));
-//        populator.addScript(new ClassPathResource("insert-users.sql"));
+        populator.addScript(new ClassPathResource("init-database.sql"));
         return populator;
     }
 }

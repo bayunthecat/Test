@@ -1,4 +1,4 @@
-package com.lwd.platform.testing.repo.mysql.jdbc;
+package com.lwd.platform.testing.repo.mysql.jdbc.impl;
 
 import com.lwd.platform.testing.model.Test;
 import com.lwd.platform.testing.repo.CrudDao;

@@ -1,7 +1,6 @@
 package com.lwd.platform.testing.config;
 
 import com.lwd.platform.testing.util.constant.Const;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,22 +15,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Qualifier(Const.Bean.USER_DETAILS_SERVICE)
-    @Autowired
     private UserDetailsService userDetailService;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public SecurityConfig(@Qualifier(Const.Bean.USER_DETAILS_SERVICE) UserDetailsService userDetailService,
+                          PasswordEncoder passwordEncoder) {
+        this.userDetailService = userDetailService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().regexMatchers("((?!user).)*").authenticated().and()
-        http.httpBasic().and().csrf().disable();
+        http.authorizeRequests().regexMatchers("((?!user).)*").authenticated().and()
+                .httpBasic().and().csrf().disable();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-
     }
 
     @Override

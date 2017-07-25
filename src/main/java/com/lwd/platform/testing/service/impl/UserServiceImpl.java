@@ -1,7 +1,11 @@
 package com.lwd.platform.testing.service.impl;
 
+import java.util.List;
+
+import com.lwd.platform.testing.model.Role;
 import com.lwd.platform.testing.model.User;
 import com.lwd.platform.testing.repo.CrudDao;
+import com.lwd.platform.testing.repo.RoleDao;
 import com.lwd.platform.testing.repo.UserDao;
 import com.lwd.platform.testing.service.StringHashProcessor;
 import com.lwd.platform.testing.service.UserService;
@@ -12,14 +16,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends AbstractCrudService<User> implements UserService {
 
-    @Autowired
     private PasswordEncoder encoder;
 
-    @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private StringHashProcessor hashExtractor;
+    private RoleDao roleDao;
+
+    public UserServiceImpl(PasswordEncoder encoder, UserDao userDao, RoleDao roleDao) {
+        this.encoder = encoder;
+        this.userDao = userDao;
+        this.roleDao = roleDao;
+    }
 
     @Override
     public User createWithHash(User user) {
@@ -30,5 +37,13 @@ public class UserServiceImpl extends AbstractCrudService<User> implements UserSe
     @Override
     protected CrudDao<User> getCrudDao() {
         return userDao;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        User user = userDao.getUserByEmail(email);
+        List<Role> roles = roleDao.getRolesForUser(user.getId());
+        user.setRoles(roles);
+        return user;
     }
 }

@@ -1,4 +1,4 @@
-package com.lwd.platform.testing.repo.mysql.jdbc;
+package com.lwd.platform.testing.repo.mysql.jdbc.impl;
 
 import com.lwd.platform.testing.model.User;
 import com.lwd.platform.testing.repo.CrudDao;
@@ -24,6 +24,8 @@ public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
     private static final String UPDATE_USER = "UPDATE user SET email = ?, password = ? WHERE id = ?";
 
     private static final String DELETE_USER = "DELETE FROM user WHERE id = ?";
+
+    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM user JOIN userrole ON (user.id = userrole.userId) JOIN role ON (userrole.roleId = role.id) WHERE email = ?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -58,7 +60,7 @@ public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
 
     @Override
     public User getUserByEmail(String email) {
-        return null;
+        return jdbcTemplate.queryForObject(SELECT_USER_BY_EMAIL, new Object[] {email}, new UserRowMapper());
     }
 
     @Override
