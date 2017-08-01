@@ -1,6 +1,6 @@
 package com.lwd.platform.testing.web.controller.rest;
 
-import com.lwd.platform.testing.model.Question;
+import com.lwd.platform.testing.model.business.Question;
 import com.lwd.platform.testing.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

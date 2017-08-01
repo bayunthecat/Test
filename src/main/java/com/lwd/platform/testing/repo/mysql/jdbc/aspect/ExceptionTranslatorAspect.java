@@ -1,16 +1,15 @@
 package com.lwd.platform.testing.repo.mysql.jdbc.aspect;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
 @Aspect
 public class ExceptionTranslatorAspect {
-
-    private static final Logger LOG = Logger.getLogger(ExceptionTranslatorAspect.class);
 
     private Map<Class<? extends Exception>, Class<? extends RuntimeException>> exceptionMapping;
 
@@ -20,25 +19,23 @@ public class ExceptionTranslatorAspect {
 
     @Around("within(com.lwd.platform.testing.repo.mysql.jdbc.impl..*)")
     public Object translate(ProceedingJoinPoint point) throws Throwable {
+        Object result = null;
         try {
-            return point.proceed();
-        } catch (Throwable throwable) {
-            Class<? extends RuntimeException> exceptionClass = exceptionMapping.get(throwable.getClass());
-            RuntimeException exception = newInstance(exceptionClass, throwable.getMessage(), throwable.getCause());
-            if (exception != null) {
-                throw exception;
-            } else {
-                throw throwable;
-            }
+            result = point.proceed();
+        } catch (RuntimeException e) {
+            Class<? extends RuntimeException> clazz = e.getClass();
+            Class<?> translatedClass = exceptionMapping.get(clazz);
+            rethrow(translatedClass, e);
         }
+        return result;
     }
 
-    private RuntimeException newInstance(Class<? extends RuntimeException> clazz, String message, Throwable cause) {
+    private void rethrow(Class<?> translatedExceptionClass, RuntimeException originalException) {
         try {
-            return clazz.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            LOG.error(e.getMessage());
-            return null;
+            Constructor<?> constructor = translatedExceptionClass.getConstructor(String.class, Throwable.class);
+            throw (RuntimeException) constructor.newInstance(originalException.getMessage(), originalException.getCause());
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw originalException;
         }
     }
 

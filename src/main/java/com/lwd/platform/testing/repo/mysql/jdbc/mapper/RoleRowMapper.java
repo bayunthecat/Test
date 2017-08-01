@@ -3,7 +3,7 @@ package com.lwd.platform.testing.repo.mysql.jdbc.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.lwd.platform.testing.model.Role;
+import com.lwd.platform.testing.model.business.Role;
 import org.springframework.jdbc.core.RowMapper;
 
 public class RoleRowMapper implements RowMapper<Role> {

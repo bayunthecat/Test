@@ -1,4 +1,4 @@
-package com.lwd.platform.testing.model;
+package com.lwd.platform.testing.model.business;
 
 public class Answer extends ModelEntity {
 

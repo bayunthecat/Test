@@ -1,6 +1,6 @@
 package com.lwd.platform.testing.repo.mysql.jdbc.mapper;
 
-import com.lwd.platform.testing.model.User;
+import com.lwd.platform.testing.model.business.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

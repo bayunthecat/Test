@@ -1,7 +1,7 @@
 package com.lwd.platform.testing.web.controller.rest;
 
-import com.lwd.platform.testing.model.ModelEntity;
-import com.lwd.platform.testing.model.Test;
+import com.lwd.platform.testing.model.business.ModelEntity;
+import com.lwd.platform.testing.model.business.Test;
 import com.lwd.platform.testing.service.TestService;
 import com.lwd.platform.testing.util.constant.Mime;
 import org.apache.log4j.Logger;

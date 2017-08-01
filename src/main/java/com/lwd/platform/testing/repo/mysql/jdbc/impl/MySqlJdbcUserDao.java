@@ -1,6 +1,7 @@
 package com.lwd.platform.testing.repo.mysql.jdbc.impl;
 
-import com.lwd.platform.testing.model.User;
+import com.lwd.platform.testing.annotations.Cached;
+import com.lwd.platform.testing.model.business.User;
 import com.lwd.platform.testing.repo.CrudDao;
 import com.lwd.platform.testing.repo.UserDao;
 import com.lwd.platform.testing.repo.mysql.jdbc.mapper.UserRowMapper;
@@ -14,6 +15,7 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
+@Cached
 @Repository
 public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
 
@@ -49,7 +51,7 @@ public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
 
     @Override
     public User read(int id) {
-        return jdbcTemplate.queryForObject(SELECT_USER_BY_ID, new UserRowMapper());
+        return jdbcTemplate.queryForObject(SELECT_USER_BY_ID, new Object[] {id}, new UserRowMapper());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.lwd.platform.testing.web.controller.rest;
 
-import com.lwd.platform.testing.model.Answer;
+import com.lwd.platform.testing.model.business.Answer;
 import com.lwd.platform.testing.service.AnswerService;
 import com.lwd.platform.testing.util.constant.Mime;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -20,6 +20,7 @@
         <wro4j.version>1.8.0</wro4j.version>
         <apache-commons-verion>3.4</apache-commons-verion>
         <apache-io-commons-version>1.3.2</apache-io-commons-version>
+        <eh-cache-version>3.3.0</eh-cache-version>
     </properties>
     <dependencies>
         <dependency>
@@ -106,6 +107,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
             <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${eh-cache-version}</version>
         </dependency>
     </dependencies>
     <build>

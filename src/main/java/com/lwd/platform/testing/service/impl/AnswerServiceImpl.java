@@ -1,6 +1,6 @@
 package com.lwd.platform.testing.service.impl;
 
-import com.lwd.platform.testing.model.Answer;
+import com.lwd.platform.testing.model.business.Answer;
 import com.lwd.platform.testing.repo.AnswerDao;
 import com.lwd.platform.testing.repo.CrudDao;
 import com.lwd.platform.testing.service.AnswerService;

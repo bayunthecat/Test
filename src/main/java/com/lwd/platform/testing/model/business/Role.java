@@ -1,4 +1,4 @@
-package com.lwd.platform.testing.model;
+package com.lwd.platform.testing.model.business;
 
 import org.springframework.security.core.GrantedAuthority;
 

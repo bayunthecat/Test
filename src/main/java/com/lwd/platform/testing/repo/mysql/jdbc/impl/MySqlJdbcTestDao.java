@@ -1,6 +1,6 @@
 package com.lwd.platform.testing.repo.mysql.jdbc.impl;
 
-import com.lwd.platform.testing.model.Test;
+import com.lwd.platform.testing.model.business.Test;
 import com.lwd.platform.testing.repo.CrudDao;
 import com.lwd.platform.testing.repo.TestDao;
 import com.lwd.platform.testing.repo.mysql.jdbc.mapper.TestRowMapper;

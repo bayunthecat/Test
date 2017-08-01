@@ -1,6 +1,6 @@
 package com.lwd.platform.testing.service;
 
-import com.lwd.platform.testing.model.User;
+import com.lwd.platform.testing.model.business.User;
 
 public interface UserService extends CrudService<User> {
 

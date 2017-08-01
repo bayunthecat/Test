@@ -1,4 +1,4 @@
-package com.lwd.platform.testing.model;
+package com.lwd.platform.testing.model.business;
 
 import java.util.List;
 

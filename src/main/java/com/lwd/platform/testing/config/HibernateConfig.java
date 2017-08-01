@@ -1,6 +1,6 @@
 package com.lwd.platform.testing.config;
 
-import com.lwd.platform.testing.model.ModelEntity;
+import com.lwd.platform.testing.model.business.ModelEntity;
 import org.hibernate.SessionFactory;
 import org.hibernate.context.internal.JTASessionContext;
 import org.hibernate.dialect.MySQLDialect;

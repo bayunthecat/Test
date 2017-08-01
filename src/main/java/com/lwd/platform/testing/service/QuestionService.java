@@ -1,7 +1,6 @@
 package com.lwd.platform.testing.service;
 
-import com.lwd.platform.testing.model.Question;
-import com.lwd.platform.testing.repo.CrudDao;
+import com.lwd.platform.testing.model.business.Question;
 
 public interface QuestionService extends CrudService<Question> {
 

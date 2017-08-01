@@ -2,14 +2,12 @@ package com.lwd.platform.testing.service.impl;
 
 import java.util.List;
 
-import com.lwd.platform.testing.model.Role;
-import com.lwd.platform.testing.model.User;
+import com.lwd.platform.testing.model.business.Role;
+import com.lwd.platform.testing.model.business.User;
 import com.lwd.platform.testing.repo.CrudDao;
-import com.lwd.platform.testing.repo.RoleDao;
 import com.lwd.platform.testing.repo.UserDao;
-import com.lwd.platform.testing.service.StringHashProcessor;
+import com.lwd.platform.testing.service.RoleService;
 import com.lwd.platform.testing.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +18,12 @@ public class UserServiceImpl extends AbstractCrudService<User> implements UserSe
 
     private UserDao userDao;
 
-    private RoleDao roleDao;
+    private RoleService roleService;
 
-    public UserServiceImpl(PasswordEncoder encoder, UserDao userDao, RoleDao roleDao) {
+    public UserServiceImpl(PasswordEncoder encoder, UserDao userDao, RoleService roleService) {
         this.encoder = encoder;
         this.userDao = userDao;
-        this.roleDao = roleDao;
+        this.roleService = roleService;
     }
 
     @Override
@@ -42,7 +40,17 @@ public class UserServiceImpl extends AbstractCrudService<User> implements UserSe
     @Override
     public User getUserByEmail(String email) {
         User user = userDao.getUserByEmail(email);
-        List<Role> roles = roleDao.getRolesForUser(user.getId());
+        return fetchRoles(user);
+    }
+
+    @Override
+    public User read(int id) {
+        User user = userDao.read(id);
+        return fetchRoles(user);
+    }
+
+    private User fetchRoles(User user) {
+        List<Role> roles = roleService.getRolesForUser(user.getId());
         user.setRoles(roles);
         return user;
     }

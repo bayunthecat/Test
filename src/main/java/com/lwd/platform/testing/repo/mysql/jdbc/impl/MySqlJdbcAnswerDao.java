@@ -1,6 +1,6 @@
 package com.lwd.platform.testing.repo.mysql.jdbc.impl;
 
-import com.lwd.platform.testing.model.Answer;
+import com.lwd.platform.testing.model.business.Answer;
 import com.lwd.platform.testing.repo.AnswerDao;
 import com.lwd.platform.testing.repo.CrudDao;
 import org.springframework.beans.factory.annotation.Autowired;
