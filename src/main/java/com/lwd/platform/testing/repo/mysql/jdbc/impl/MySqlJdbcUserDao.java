@@ -49,6 +49,7 @@ public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
         return user;
     }
 
+    @Cached
     @Override
     public User read(int id) {
         return jdbcTemplate.queryForObject(SELECT_USER_BY_ID, new Object[] {id}, new UserRowMapper());
@@ -56,8 +57,7 @@ public class MySqlJdbcUserDao implements UserDao, CrudDao<User> {
 
     @Override
     public User update(User user) {
-        //TODO make generic parameter extraction
-        return jdbcTemplate.update(UPDATE_USER, 0, 1) != 0 ? user : null;
+        return jdbcTemplate.update(UPDATE_USER, user.getEmail(), user.getPasswordHash(), user.getId()) != 0 ? user : null;
     }
 
     @Override

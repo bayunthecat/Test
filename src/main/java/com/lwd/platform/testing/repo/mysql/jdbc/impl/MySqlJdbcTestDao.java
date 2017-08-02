@@ -24,6 +24,10 @@ public class MySqlJdbcTestDao implements CrudDao<Test>, TestDao {
 
     private static final String UPDATE_TEST = "UPDATE test SET name = ? WHERE id = ?";
 
+    private static final String DELETE_TEST_BY_ID = "DELETE * FROM test WHERE id = ?";
+
+    private static final String SELECT_ALL_TESTS = "SELECT * FROM test LIMIT ?,?";
+
     private JdbcTemplate template;
 
     @Autowired
@@ -58,11 +62,11 @@ public class MySqlJdbcTestDao implements CrudDao<Test>, TestDao {
 
     @Override
     public Test delete(Test test) {
-        return template.update("DELETE * FROM test WHERE id = ?", test.getId()) != 0 ? test : null;
+        return template.update(DELETE_TEST_BY_ID, test.getId()) != 0 ? test : null;
     }
 
     @Override
     public List<Test> getTests(int count, int offset) {
-        return null;
+        return template.query(SELECT_ALL_TESTS, new Object[] {offset, count}, new TestRowMapper());
     }
 }

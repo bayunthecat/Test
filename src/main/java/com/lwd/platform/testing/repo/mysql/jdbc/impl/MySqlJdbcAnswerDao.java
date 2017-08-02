@@ -3,6 +3,7 @@ package com.lwd.platform.testing.repo.mysql.jdbc.impl;
 import com.lwd.platform.testing.model.business.Answer;
 import com.lwd.platform.testing.repo.AnswerDao;
 import com.lwd.platform.testing.repo.CrudDao;
+import com.lwd.platform.testing.repo.mysql.jdbc.mapper.AnswerRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -17,6 +18,8 @@ import java.sql.Statement;
 public class MySqlJdbcAnswerDao implements CrudDao<Answer>, AnswerDao {
 
     private static final String INSERT_ANSWER = "INSERT INTO answer (content, questionId) VALUES (?, ?)";
+
+    private static final String SELECT_ANSWER_BY_ID = "SELECT * FROM answer WHERE id = ?";
 
     private JdbcTemplate template;
 
@@ -44,16 +47,16 @@ public class MySqlJdbcAnswerDao implements CrudDao<Answer>, AnswerDao {
 
     @Override
     public Answer read(int id) {
-        return null;
+        return template.queryForObject(SELECT_ANSWER_BY_ID, new Object[] {id}, new AnswerRowMapper());
     }
 
     @Override
     public Answer update(Answer answer) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Answer delete(Answer answer) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

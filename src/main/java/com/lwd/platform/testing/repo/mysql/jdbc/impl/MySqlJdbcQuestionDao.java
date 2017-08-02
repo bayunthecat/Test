@@ -22,7 +22,7 @@ public class MySqlJdbcQuestionDao implements CrudDao<Question>, QuestionDao {
     //TODO check null cases
     private static final String SELECT_QUESTION_BY_ID = "SELECT q.id, q.content, t.id, t.name FROM question q INNER JOIN topic t ON (q.topicId = t.id) WHERE q.id = 1";
 
-    private static final String DELETE_QUESTION = "DELETE question WHERE id = ?";
+    private static final String DELETE_QUESTION = "DELETE FROM question WHERE id = ?";
 
     private static final String UPDATE_QUESTION = "UPDATE question SET content = ?, topicId = ? WHERE id = ?";
 

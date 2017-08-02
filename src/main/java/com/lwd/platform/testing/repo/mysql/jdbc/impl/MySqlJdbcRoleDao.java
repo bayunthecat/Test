@@ -11,7 +11,7 @@ import com.lwd.platform.testing.repo.mysql.jdbc.mapper.RoleRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-@Cached
+@Cached(capacity = 3)
 @Repository
 public class MySqlJdbcRoleDao implements CrudDao<Role>, RoleDao {
 
@@ -30,6 +30,7 @@ public class MySqlJdbcRoleDao implements CrudDao<Role>, RoleDao {
         throw new UnsupportedOperationException();
     }
 
+    @Cached
     @Override
     public Role read(int id) {
         return template.queryForObject(SELECT_ROLE_BY_ID, new Object[] {id}, new RoleRowMapper());
@@ -37,12 +38,12 @@ public class MySqlJdbcRoleDao implements CrudDao<Role>, RoleDao {
 
     @Override
     public Role update(Role role) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Role delete(Role role) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override

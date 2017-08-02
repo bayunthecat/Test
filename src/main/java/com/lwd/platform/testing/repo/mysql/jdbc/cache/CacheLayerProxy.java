@@ -4,27 +4,32 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import com.lwd.platform.testing.annotations.Cached;
 import org.ehcache.Cache;
 
-//TODO change name
-public class CacheProxy implements InvocationHandler {
+public class CacheLayerProxy implements InvocationHandler {
 
     private Object objectToBeProxied;
 
     private Cache<Object, Object> entityCache;
 
-    public CacheProxy(Object objectToBeProxied, Cache<Object, Object> entityCache) {
+    public CacheLayerProxy(Object objectToBeProxied, Cache<Object, Object> entityCache) {
         this.objectToBeProxied = objectToBeProxied;
         this.entityCache = entityCache;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        InvocationKey invocationKey = new InvocationKey(method, args);
-        Object result = entityCache.get(invocationKey);
-        if (result == null) {
+        Object result;
+        if (method.isAnnotationPresent(Cached.class)) {
+            InvocationKey invocationKey = new InvocationKey(method, args);
+            result = entityCache.get(invocationKey);
+            if (result == null) {
+                result = method.invoke(objectToBeProxied, args);
+                entityCache.put(invocationKey, result);
+            }
+        } else {
             result = method.invoke(objectToBeProxied, args);
-            entityCache.put(invocationKey, result);
         }
         return result;
     }
