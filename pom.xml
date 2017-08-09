@@ -119,6 +119,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.2</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -143,25 +144,41 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>ro.isdc.wro4j</groupId>
-                <artifactId>wro4j-maven-plugin</artifactId>
-                <version>${wro4j.version}</version>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.5</version>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <id>npm-node-install</id>
                         <goals>
-                            <goal>run</goal>
+                            <goal>install-node-and-npm</goal>
                         </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>gulp-install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>install gulp-install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>gulp-build</id>
+                        <goals>
+                            <goal>gulp</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>build</arguments>
+                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
-                    <targetGroups>all</targetGroups>
-                    <minimize>false</minimize>
-                    <contextFolder>src/main/webapp/</contextFolder>
-                    <jsDestinationFolder>src/main/webapp/WEB-INF/wro/js/</jsDestinationFolder>
-                    <cssDestinationFolder>src/main/webapp/WEB-INF/wro/css/</cssDestinationFolder>
-                    <wroFile>src/main/webapp/WEB-INF/wro.xml</wroFile>
-                    <ignoreMissingResources>false</ignoreMissingResources>
+                    <nodeVersion>v8.2.1</nodeVersion>
+                    <installDirectory>src/main/frontend</installDirectory>
                 </configuration>
             </plugin>
         </plugins>

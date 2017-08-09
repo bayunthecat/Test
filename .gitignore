@@ -1,4 +1,5 @@
 .idea
 target
+node
 *.iml
 /src/main/webapp/WEB-INF/wro
